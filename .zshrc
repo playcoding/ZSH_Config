@@ -109,13 +109,13 @@ PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
 
-#alias for cnpm
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-  --cache=$HOME/.npm/.cache/cnpm \
-  --disturl=https://npm.taobao.org/dist \
-  --userconfig=$HOME/.cnpmrc"
+# alias for cnpm
+# alias cnpm="npm --registry=https://registry.npm.taobao.org \
+#  --cache=$HOME/.npm/.cache/cnpm \
+#  --disturl=https://npm.taobao.org/dist \
+#  --userconfig=$HOME/.cnpmrc"
 
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/Users/will/Downloads/cocos2d-js-v3.0-rc2/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
+# export COCOS_CONSOLE_ROOT=/Users/will/Downloads/cocos2d-js-v3.0-rc2/tools/cocos2d-console/bin
+# export PATH=$COCOS_CONSOLE_ROOT:$PATH
