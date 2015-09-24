@@ -101,7 +101,29 @@ alias showallfile='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias noshowallfile='defaults write com.apple.finder AppleShowAllFiles -bool false'
 
 setopt correctall
-. /Users/will/powerline/powerline/bindings/zsh/powerline.zsh
+
+# Shell 中使用 Vi 模式
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+
+# 在终端命令行最右侧的 Vim 模式显示 INSERT 与 NORMAL 状态
+VIMODE='-- INSERT --'
+function zle-line-init zle-keymap-select {
+    VIMODE="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    # 根据终端的 Vim 模式来更改提示文字的颜色
+    if [ $VIMODE = "-- INSERT --" ] ; then
+        RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
+    elif [ $VIMODE = "-- NORMAL --" ] ; then
+        RPROMPT='%{$fg[red]%}${VIMODE}%{$reset_color%}'
+    fi
+
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
+# 结束
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
@@ -119,3 +141,4 @@ PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 # export COCOS_CONSOLE_ROOT=/Users/will/Downloads/cocos2d-js-v3.0-rc2/tools/cocos2d-console/bin
 # export PATH=$COCOS_CONSOLE_ROOT:$PATH
+export PATH="/usr/local/sbin:$PATH"
