@@ -36,7 +36,7 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -45,12 +45,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting)
+plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting sudo vi-mode)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,7 +75,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="vi ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cls='clear'
 alias ll='ls -l'
@@ -84,8 +83,8 @@ alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
-alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
-alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
+alias -s html=vi     # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
+alias -s rb=vi       # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
 alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
 alias -s js=vi
 alias -s c=vi
@@ -107,13 +106,13 @@ bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 
 # 在终端命令行最右侧的 Vim 模式显示 INSERT 与 NORMAL 状态
-VIMODE='-- INSERT --'
+VIMODE='<< INSERT'
 function zle-line-init zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    VIMODE="${${KEYMAP/vicmd/<< NORMAL}/(main|viins)/<< INSERT}"
     # 根据终端的 Vim 模式来更改提示文字的颜色
-    if [ $VIMODE = "-- INSERT --" ] ; then
+    if [ $VIMODE = "<< INSERT" ] ; then
         RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
-    elif [ $VIMODE = "-- NORMAL --" ] ; then
+    elif [ $VIMODE = "<< NORMAL" ] ; then
         RPROMPT='%{$fg[red]%}${VIMODE}%{$reset_color%}'
     fi
 
@@ -131,14 +130,3 @@ PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
 
-# alias for cnpm
-# alias cnpm="npm --registry=https://registry.npm.taobao.org \
-#  --cache=$HOME/.npm/.cache/cnpm \
-#  --disturl=https://npm.taobao.org/dist \
-#  --userconfig=$HOME/.cnpmrc"
-
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-# export COCOS_CONSOLE_ROOT=/Users/will/Downloads/cocos2d-js-v3.0-rc2/tools/cocos2d-console/bin
-# export PATH=$COCOS_CONSOLE_ROOT:$PATH
-export PATH="/usr/local/sbin:$PATH"
