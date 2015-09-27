@@ -5,7 +5,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="agnoster"
+ZSH_THEME="smt"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -45,7 +47,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting sudo vi-mode)
+plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting vi-mode cp)
 
 # User configuration
 
@@ -103,17 +105,26 @@ setopt correctall
 
 # Shell 中使用 Vi 模式
 bindkey -v
+
+# 设定 Vi 下 INSERT 模式转换 NORMAL 模式的快捷键
 bindkey -M viins 'jj' vi-cmd-mode
 
-# 在终端命令行最右侧的 Vim 模式显示 INSERT 与 NORMAL 状态
-VIMODE='<< INSERT'
+# 在终端命令行最右侧显示 Vim 模式的 INSERT 与 NORMAL 状态，提示文字根据不同模式显示不同的颜色
+#################### 开始 ####################
+VIMODE='[INSERT]'
 function zle-line-init zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/<< NORMAL}/(main|viins)/<< INSERT}"
+    VIMODE="${${KEYMAP/vicmd/[NORMAL]}/(main|viins)/[INSERT]}"
     # 根据终端的 Vim 模式来更改提示文字的颜色
-    if [ $VIMODE = "<< INSERT" ] ; then
-        RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
-    elif [ $VIMODE = "<< NORMAL" ] ; then
-        RPROMPT='%{$fg[red]%}${VIMODE}%{$reset_color%}'
+    if [ $VIMODE = "[INSERT]" ] ; then
+        PROMPT='
+%{$fg[cyan]%}%n@%m %{$reset_color%} %{$fg[blue]%}%d %{$reset_color%} %{$fg[gray]%}[%D %t] %{$reset_color%} $(git_prompt_info)
+%{$fg[white]%}%!%{$reset_color%} %{$fg[green]%}${VIMODE} >>%{$reset_color%} '
+        RPROMPT=''
+    elif [ $VIMODE = "[NORMAL]" ] ; then
+        PROMPT='
+%{$fg[cyan]%}%n@%m %{$reset_color%} %{$fg[blue]%}%d %{$reset_color%} %{$fg[gray]%}[%D %t] %{$reset_color%} $(git_prompt_info)
+%{$fg[white]%}%!%{$reset_color%} %{$fg[red]%}${VIMODE} >>%{$reset_color%} '
+        RPROMPT=''
     fi
 
     zle reset-prompt
@@ -121,8 +132,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
-# 结束
+#################### 结束 ####################
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
