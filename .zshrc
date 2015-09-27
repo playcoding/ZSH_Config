@@ -131,6 +131,8 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+# 按 ESC 后切换模式默认为0.4秒，更改成0.1秒，设置后 ESC 映射 jj 快捷键失效
+# export KEYTIMEOUT=1
 
 #################### 结束 ####################
 
