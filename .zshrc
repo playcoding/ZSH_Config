@@ -7,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="agnoster"
-ZSH_THEME="smt"
+#ZSH_THEME="smt"
+ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -47,7 +48,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting vi-mode cp)
+plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting vi-mode cp jump)
 
 # User configuration
 
@@ -76,7 +77,7 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
+#################### 别名设置开始 ####################
 alias zshconfig="vi ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cls='clear'
@@ -100,7 +101,9 @@ alias -s bz2='tar -xjvf'
 alias showallfile='defaults write com.apple.finder AppleShowAllFiles -bool true'
 # 不显示Mac系统隐藏文件
 alias noshowallfile='defaults write com.apple.finder AppleShowAllFiles -bool false'
+#################### 别名设置结束 ####################
 
+# 开启命令输入纠错功能
 setopt correctall
 
 # Shell 中使用 Vi 模式
@@ -142,3 +145,8 @@ PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
 
+# Add the following line to your ~/.bash_profile or ~/.zshrc file (and remember to source the file to update your current session):
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+# zsh-completions 插件的配置
+fpath=(/usr/local/share/zsh-completions $fpath)
