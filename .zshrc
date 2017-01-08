@@ -150,3 +150,6 @@ PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 # zsh-completions 插件的配置
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
