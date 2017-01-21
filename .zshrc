@@ -52,7 +52,6 @@ plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-sea
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -139,14 +138,16 @@ zle -N zle-keymap-select
 
 #################### 结束 ####################
 
+export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
 
-# Add the following line to your ~/.bash_profile or ~/.zshrc file (and remember to source the file to update your current session):
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+# Autojump 插件的配置
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # zsh-completions 插件的配置
 fpath=(/usr/local/share/zsh-completions $fpath)
