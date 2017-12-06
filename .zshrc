@@ -48,7 +48,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting vi-mode cp jump)
+plugins=(git ruby autojump osx mvn gradle systemd colorize history-substring-search common-aliases history themes per-directory-history github zsh-syntax-highlighting vi-mode cp jump colored-man-pages sudo brew brew-cask node extract)
 
 # User configuration
 
@@ -96,10 +96,11 @@ alias -s gz='tar -xzvf'
 alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
-# 显示Mac系统隐藏文件
-alias showallfile='defaults write com.apple.finder AppleShowAllFiles -bool true'
-# 不显示Mac系统隐藏文件
-alias noshowallfile='defaults write com.apple.finder AppleShowAllFiles -bool false'
+
+# 显示Mac系统隐藏文件 (macOS 10.13 起无效改用 cmd + shift + .)
+# alias showallfile='defaults write com.apple.finder AppleShowAllFiles -bool true'
+# 不显示Mac系统隐藏文件 (macOS 10.13 起无效改用 cmd + shift + .)
+# alias noshowallfile='defaults write com.apple.finder AppleShowAllFiles -bool false'
 #################### 别名设置结束 ####################
 
 # 开启命令输入纠错功能
@@ -145,6 +146,12 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+
+export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # Autojump 插件的配置
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
